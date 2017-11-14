@@ -1,5 +1,6 @@
 /*global
 allFeeds
+loadFeed
  */
 /* feedreader.js
  *
@@ -83,9 +84,7 @@ $(function () {
 
     beforeEach(function (done) {
       menuIcon.trigger('click');
-      setTimeout(function () {
-        done();
-      }, 1000);
+      setTimeout(done, 1000);
     });
 
     it('shows itself when clicked', function (done) {
@@ -100,14 +99,24 @@ $(function () {
     });
   });
 
-  /* TODO: Write a new test suite named "Initial Entries" */
+  /* #13 Write a new test suite named "Initial Entries" */
+  describe('Initial Entries', function () {
+    /* #14 Write a test that ensures when the loadFeed
+     * function is called and completes its work, there is at least
+     * a single .entry element within the .feed container.
+     * Remember, loadFeed() is asynchronous so this test will require
+     * the use of Jasmine's beforeEach and asynchronous done() function.
+     */
+    beforeEach(function (done) {
+      loadFeed(0, done);
+    });
 
-  /* TODO: Write a test that ensures when the loadFeed
-   * function is called and completes its work, there is at least
-   * a single .entry element within the .feed container.
-   * Remember, loadFeed() is asynchronous so this test will require
-   * the use of Jasmine's beforeEach and asynchronous done() function.
-   */
+    it('are loaded', function (done) {
+      expect($('.feed').find('.entry').length).toBeGreaterThan(0);
+      done();
+    });
+
+  });
 
   /* TODO: Write a new test suite named "New Feed Selection" */
 
