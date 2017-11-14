@@ -118,10 +118,21 @@ $(function () {
 
   });
 
-  /* TODO: Write a new test suite named "New Feed Selection" */
+  /* Write a new test suite named "New Feed Selection" */
+  describe('New Feed Selection', function () {
 
-  /* TODO: Write a test that ensures when a new feed is loaded
-   * by the loadFeed function that the content actually changes.
-   * Remember, loadFeed() is asynchronous.
-   */
+    let feedNum = 0;
+    beforeEach(function (done) {
+      feedNum++;
+      loadFeed(feedNum, done);
+      done();
+    });
+
+    /* TODO: Write a test that ensures when a new feed is loaded
+     * by the loadFeed function that the content actually changes.
+     * Remember, loadFeed() is asynchronous.
+     */
+    
+  });
+
 }());
