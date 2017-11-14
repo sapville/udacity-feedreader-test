@@ -36,7 +36,8 @@ $(function () {
     it('have all their URLs filled', function () {
       allFeeds.forEach((feed) => {
         expect(feed['url']).toBeDefined();
-        expect(feed['url']).not.toBe('');});
+        expect(feed['url']).not.toBe('');
+      });
     });
 
     /* #09 Write a test that loops through each feed
@@ -46,27 +47,58 @@ $(function () {
     it('have all their names filled', function () {
       allFeeds.forEach((feed) => {
         expect(feed['name']).toBeDefined();
-        expect(feed['name']).not.toBe('');});
+        expect(feed['name']).not.toBe('');
+      });
     });
   });
 
+  function getTransformShift () {
+    const shift = $('.slide-menu').css('transform').split(',')[4];
+    return Number(shift);
+  }
+
   /* #10 Write a new test suite named "The menu" */
   describe('The menu', function () {
+    /* #11 Write a test that ensures the menu element is
+     * hidden by default. You'll have to analyze the HTML and
+     * the CSS to determine how we're performing the
+     * hiding/showing of the menu element.
+     */
+
+    it('is hidden by default', function () {
+      expect($('body').hasClass('menu-hidden')).toBe(true);
+      expect(getTransformShift()).toBeLessThan(0);
+    });
 
   });
 
-  
-  /* TODO: Write a test that ensures the menu element is
-   * hidden by default. You'll have to analyze the HTML and
-   * the CSS to determine how we're performing the
-   * hiding/showing of the menu element.
-   */
-
-  /* TODO: Write a test that ensures the menu changes
+  /* #12 Write a test that ensures the menu changes
    * visibility when the menu icon is clicked. This test
    * should have two expectations: does the menu display when
    * clicked and does it hide when clicked again.
    */
+  describe('The menu', function () {
+    const menuIcon = $('.menu-icon-link');
+    const body = $('body');
+
+    beforeEach(function (done) {
+      menuIcon.trigger('click');
+      setTimeout(function () {
+        done();
+      }, 1000);
+    });
+
+    it('shows itself when clicked', function (done) {
+      expect(body.hasClass('menu-hidden')).toBe(false);
+      expect(getTransformShift()).toBeGreaterThanOrEqual(0);
+      done();
+    });
+    it('hides itself when clicked again', function (done) {
+      expect(body.hasClass('menu-hidden')).toBe(true);
+      expect(getTransformShift()).toBeLessThan(0);
+      done();
+    });
+  });
 
   /* TODO: Write a new test suite named "Initial Entries" */
 
