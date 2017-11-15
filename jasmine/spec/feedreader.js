@@ -118,11 +118,12 @@ $(function () {
       loadFeed(feedNum, done);
     });
 
-    for (let i = 1; i < allFeeds.length; i++) {
-      it(`loads ${allFeeds[i].name}`, function (done) {
-        expect($('.header-title').text()).toBe(allFeeds[feedNum].name);
+    allFeeds.slice(1).forEach((feed) => { //check every feed except the first one (checked during Initial Entries test)
+      it(`loads ${feed.name}`, function (done) {
+        expect($('.header-title').text()).toBe(feed.name); //feed load succeeded
+        expect($('.feed').find('.entry').length).toBeGreaterThan(0); //feed contains entries
         done();
       });
-    }
+    });
   });
 }());
