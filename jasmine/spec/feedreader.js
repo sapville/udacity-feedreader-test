@@ -36,8 +36,8 @@ $(function () {
      */
     it('have all their URLs filled', function () {
       allFeeds.forEach((feed) => {
-        expect(feed['url']).toBeDefined();
-        expect(feed['url']).not.toBe('');
+        expect(feed.url).toBeDefined();
+        expect(feed.url).not.toBe('');
       });
     });
 
@@ -47,8 +47,8 @@ $(function () {
      */
     it('have all their names filled', function () {
       allFeeds.forEach((feed) => {
-        expect(feed['name']).toBeDefined();
-        expect(feed['name']).not.toBe('');
+        expect(feed.name).toBeDefined();
+        expect(feed.name).not.toBe('');
       });
     });
   });
@@ -118,21 +118,28 @@ $(function () {
 
   });
 
-  /* Write a new test suite named "New Feed Selection" */
+  /* #15 Write a new test suite named "New Feed Selection" */
   describe('New Feed Selection', function () {
 
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
     let feedNum = 0;
+
     beforeEach(function (done) {
       feedNum++;
       loadFeed(feedNum, done);
-      done();
     });
 
-    /* TODO: Write a test that ensures when a new feed is loaded
+    /* #16 Write a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
-    
+    for (let i = 1; i < allFeeds.length; i++) {
+      it(`loads ${allFeeds[i].name}`, function (done) {
+        expect($('.header-title').text()).toBe(allFeeds[feedNum].name);
+        done();
+      });
+    }
   });
 
 }());

@@ -100,13 +100,11 @@ google.setOnLoadCallback(init);
  * until the DOM is ready.
  */
 $(function () {
-  // const container = $('.feed'),
   // noinspection Annotator
   const feedList = $('.feed-list'),
     feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
     menuIcon = $('.menu-icon-link');
   let feedId = 0;
-  // allFeeds.splice(0, allFeeds.length);
   /* Loop through all of our feeds, assigning an id property to
    * each of the feeds based upon its index within the array.
    * Then parse that feed against the feedItemTemplate (created
