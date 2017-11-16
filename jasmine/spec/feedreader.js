@@ -98,7 +98,7 @@ $(function () {
     it('are loaded', function (done) {
       //since the first feed is to be loaded (or not) anyway, we can just make sure that entries are present
       //and there is no need to check the title
-      expect($('.feed').find('.entry').length).toBeGreaterThan(0);
+      expect($('.feed .entry').length).toBeGreaterThan(0);
       done();
     });
 
@@ -112,16 +112,20 @@ $(function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; //some feeds take there time to load...
 
     let feedNum = 0;
+    let prevFeedHtml = '';
 
     beforeEach(function (done) {
-      feedNum++;
       loadFeed(feedNum, done);
+      feedNum++;
     });
 
-    allFeeds.slice(1).forEach((feed) => { //check every feed except the first one (checked during Initial Entries test)
+    allFeeds.forEach((feed) => { //check every feed except the first one (checked during Initial Entries test)
       it(`loads ${feed.name}`, function (done) {
         expect($('.header-title').text()).toBe(feed.name); //feed load succeeded
-        expect($('.feed').find('.entry').length).toBeGreaterThan(0); //feed contains entries
+        expect($('.feed .entry').length).toBeGreaterThan(0); //feed contains entries
+        const feedHtml = $('.feed').html();
+        expect(feedHtml).not.toBe(prevFeedHtml); //to be sure that the content of the feed has changed
+        prevFeedHtml = feedHtml;
         done();
       });
     });
