@@ -22,8 +22,7 @@ $(function () {
    */
   it('have all their URLs filled', function () {
     allFeeds.forEach((feed) => {
-      expect(feed.url).toBeDefined();
-      expect(feed.url).not.toBe('');
+      expect(feed.url).toBeTruthy();
     });
   });
   /*
@@ -33,8 +32,7 @@ $(function () {
    */
   it('have all their names filled', function () {
     allFeeds.forEach((feed) => {
-      expect(feed.name).toBeDefined();
-      expect(feed.name).not.toBe('');
+      expect(feed.name).toBeTruthy();
     });
   });
 
@@ -70,7 +68,7 @@ $(function () {
     const body = $('body');
 
     beforeEach(function (done) { // since menu sliding takes some time css-properties should be checked asynchronously
-      menuIcon.trigger('click');
+      menuIcon.click();
       setTimeout(done, 1000);
     });
 
@@ -119,7 +117,7 @@ $(function () {
       feedNum++;
     });
 
-    allFeeds.forEach((feed) => { //check every feed except the first one (checked during Initial Entries test)
+    allFeeds.forEach((feed) => {
       it(`loads ${feed.name}`, function (done) {
         expect($('.header-title').text()).toBe(feed.name); //feed load succeeded
         expect($('.feed .entry').length).toBeGreaterThan(0); //feed contains entries
